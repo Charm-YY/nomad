@@ -51,7 +51,6 @@ function readQuote(){
 // 명언 변수에서 랜덤으로 한개 가져오기
     quote.innerText = todaysQuote.quote;
     author.innerText = todaysQuote.author;
-    console.log(quote, author)
 }
 readQuote();
 setInterval(readQuote, 3000);
