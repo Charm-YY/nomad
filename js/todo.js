@@ -4,9 +4,13 @@ const $toDoList = document.querySelector("#todo-list");
 
 function deleteTodo(event) {
   // button click : delete
-  const liTg = event.target.parentElement; // event.target : span
+  const liTg = event.target.parentElement; // event.target : button
   liTg.remove(); // button click 시 삭제
+  ToDos = ToDos.filter((toDo)=> toDo.id !== parseInt(liTg.id)); //filter함수를 사용하여 지운 li id값을 찾아서 그값을 빼고 반환 toDo.id 는 number liTg.id는 string
+  saveToDos(); // 함수를 다시 호출해야 삭제 된 후 ToDos의 값을 다시 저장할수 있음
 }
+
+
 
 const TODOS_Key = "todos"; // todos 라는 문자열이 계속 사용 되어서 변수로 저장
 let ToDos = []; // 빈배열 생성
@@ -47,11 +51,10 @@ function handleToDoSubmit(event) {
 
 $toDoForm.addEventListener("submit", handleToDoSubmit); // ToDo list 작성 후 event(enter) 실행 시  handleToDoSubmit 함수 실행
 
-
-
 const savedToDo = localStorage.getItem(TODOS_Key); // localStorage API? DATA? 에 저장한 값 불러오기
-if (savedToDo) { //savedToDo에 값이 있으면 실행
-  const parseToDos = JSON.parse(savedToDo); // JSON 문자열을 문자열 안에 있는 js 자료형으로 바꿔주는 함수? 
+if (savedToDo) {
+  //savedToDo에 값이 있으면 실행
+  const parseToDos = JSON.parse(savedToDo); // JSON 문자열을 문자열 안에 있는 js 자료형으로 바꿔주는 함수?
   // ex) const a = '['a','b','c']' 를 JSON.parse(a) => ['a', 'b', 'c'] 가 된다
   ToDos = parseToDos;
   parseToDos.forEach(paintToDo); // localStorage에 저장된 각 value를 인자로 받아 paintToDo 반복 실행 그러므로 새로고침해도 웹페이지에 ToDo list가 보이게 됨.
