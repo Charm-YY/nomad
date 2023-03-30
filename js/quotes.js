@@ -40,17 +40,20 @@ const quotes = [
         author: 'Jim Rohn'
     },
 ]; //명언
+const $quote =document.querySelector('#quote');
+
 const quote = document.querySelector('#quote span:first-child');
 //첫번째 span
 const author = document.querySelector('#quote span:last-child');
 //두번째 span
 
-
 function readQuote(){
-    const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
-// 명언 변수에서 랜덤으로 한개 가져오기
+    const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)]; // 명언 변수에서 랜덤으로 한개 가져오기
+const $p = document.createElement('p');
     quote.innerText = todaysQuote.quote;
     author.innerText = todaysQuote.author;
+    $p.appendChild(author);
+    $quote.appendChild($p);
 }
 readQuote();
 setInterval(readQuote, 3000);
